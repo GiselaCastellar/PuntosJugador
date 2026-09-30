@@ -10,7 +10,7 @@ namespace SistemaPuntos
         private int puntos;
         private int nivel;
 
-        // Sobrecarga de constructores (Reutilización con 'this')
+        // Sobrecarga de constructores
 
         // Constructor de inicialización completa y validaciones
         public PuntosJugador(string nombreJugador, int puntos, int nivel)
@@ -53,7 +53,7 @@ namespace SistemaPuntos
         {
         }
 
-        // 3. Sobrecarga del método AgregarPuntos
+        // Sobrecarga del método AgregarPuntos
 
         // Versión 1: Agregar puntos básicos
         public void AgregarPuntos(int puntos)
@@ -93,12 +93,11 @@ namespace SistemaPuntos
                     Console.WriteLine("¡BONIFICACIÓN APLICADA! Se otorgó el doble de puntos.");
                 }
 
-                // Reutilizamos la Versión 2 para evitar repetir código
                 this.AgregarPuntos(puntosFinales, motivo);
             }
         }
 
-        // 4. Método MostrarInformacion
+        // Método MostrarInformacion
         public void MostrarInformacion()
         {
             Console.WriteLine("----------------------------------");
@@ -107,5 +106,67 @@ namespace SistemaPuntos
             Console.WriteLine("Nivel: " + this.nivel);
             Console.WriteLine("----------------------------------");
         }
+         
+        // Operador +
+        public static PuntosJugador operator +(PuntosJugador j1, PuntosJugador j2)
+        {
+            string nuevoNombre = j1.nombreJugador + " y " + j2.nombreJugador;
+            int nuevosPuntos = j1.puntos + j2.puntos;
+
+            return new PuntosJugador(nuevoNombre, nuevosPuntos, 1);
+        }
+
+        // Operador -
+        public static PuntosJugador operator -(PuntosJugador j1, PuntosJugador j2)
+        {
+            int resultadoPuntos = j1.puntos - j2.puntos;
+
+            if (resultadoPuntos < 0)
+            {
+                resultadoPuntos = 0;
+            }
+
+            return new PuntosJugador("Diferencia de " + j1.nombreJugador, resultadoPuntos, 1);
+        }
+
+        // Operador ==
+        public static bool operator ==(PuntosJugador j1, PuntosJugador j2)
+        {
+            if (j1.puntos == j2.puntos)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // Operador !=
+        public static bool operator !=(PuntosJugador j1, PuntosJugador j2)
+        {
+            if (j1.puntos != j2.puntos)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // Conversión explícita (PuntosJugador -> int)
+        public static explicit operator int(PuntosJugador j)
+        {
+            return j.puntos;
+        }
+
+        // Conversión implícita (int -> PuntosJugador)
+        public static implicit operator PuntosJugador(int puntosEntrada)
+        {
+            return new PuntosJugador("Jugador Nuevo", puntosEntrada, 1);
+        }
+
+
     }
 }

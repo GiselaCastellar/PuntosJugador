@@ -37,31 +37,69 @@ namespace SistemaPuntos
             PuntosJugador jugador4 = new PuntosJugador(nombre4, puntos4, nivel4);
             jugador4.MostrarInformacion();
 
-            Console.WriteLine("\n=== PRUEBA DE AGREGAR PUNTOS ===");
+            Console.WriteLine("=== PRUEBA DE AGREGAR PUNTOS ===");
 
             // Versión 1
-            Console.WriteLine("\n-> Sumando 50 puntos a " + nombre2 + ":");
+            Console.WriteLine("Sumando 50 puntos a " + nombre2 + ":");
             jugador2.AgregarPuntos(50);
 
             // Versión 2
-            Console.WriteLine("\n-> Sumando 100 puntos a " + nombre3 + ":");
+            Console.WriteLine("Sumando 100 puntos a " + nombre3 + ":");
             jugador3.AgregarPuntos(100, "Superó el nivel de práctica");
 
             // Versión 3
 
-            Console.Write("\n-> Ingrese la cantidad de puntos a agregar con bonificación a " + nombre4 + ": ");
+            Console.Write("Ingrese la cantidad de puntos a agregar con bonificación a " + nombre4 + ": ");
             int puntosBonif = int.Parse(Console.ReadLine()!);
 
             jugador4.AgregarPuntos(puntosBonif, "Supero el nivel en tiempo record", true);
 
-            Console.WriteLine("\n=== POSICIÓN FINAL DE LOS JUGADORES ===");
+            Console.WriteLine("=== POSICIÓN FINAL DE LOS JUGADORES ===");
 
             jugador1.MostrarInformacion();
             jugador2.MostrarInformacion();
             jugador3.MostrarInformacion();
             jugador4.MostrarInformacion();
 
-            Console.WriteLine("\nPresiona Enter para salir...");
+            // Prueba de Suma de Objetos (+)
+            Console.WriteLine("Suma de jugadores (jugador3 + jugador4):");
+            PuntosJugador resultadoSuma = jugador3 + jugador4;
+            resultadoSuma.MostrarInformacion();
+
+            // Prueba de Resta de Objetos (-)
+            Console.WriteLine("Resta de jugadores (jugador4 - jugador3):");
+            PuntosJugador resultadoResta = jugador4 - jugador3;
+            resultadoResta.MostrarInformacion();
+
+            // Prueba de Igualdad (==)
+            Console.WriteLine("Comparando si jugador1 y jugador2 tienen iguales puntos (==):");
+            if (jugador1 == jugador2)
+            {
+                Console.WriteLine("Resultado: Tienen los MISMOS puntos.");
+            }
+            else
+            {
+                Console.WriteLine("Resultado: Tienen DISTINTOS puntos.");
+            }
+
+            // Prueba de Distinto (!=)
+            Console.WriteLine("Comparando si jugador3 y jugador4 tienen distintos puntos (!=):");
+            if (jugador3 != jugador4)
+            {
+                Console.WriteLine("Resultado: Confirmado, tienen DISTINTA cantidad de puntos.");
+            }
+
+            // Prueba de Conversión Explícita (PuntosJugador -> int)
+            Console.WriteLine("Conversión explícita: int puntos = (int)jugador4;");
+            int puntosExtraidos = (int)jugador4;
+            Console.WriteLine("Puntos extraídos del objeto: " + puntosExtraidos);
+
+            // Prueba de Conversión Implícita (int -> PuntosJugador)
+            Console.WriteLine("Conversión implícita: PuntosJugador jugador5 = 1000;");
+            PuntosJugador jugador5 = 1000;
+            jugador5.MostrarInformacion();
+
+            Console.WriteLine("Presiona Enter para salir...");
             Console.ReadLine();
         }
     }
